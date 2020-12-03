@@ -18,14 +18,16 @@ import React from "react";
 // }
 
 // Same as Car 1,2
+
 const Car3 = (props) => (
-    <div>
+    <div style={{border: '1px solid #ccc', marginBottom: '10px'}}>
         <h1>Car component</h1>
         <p>Name:{props.obj.name}</p>
         <p>Year:{props.obj.year}</p>
-        <p>{1 + 1}</p>
-        <p>Number: <strong>{Math.round(Math.random() * 100)}</strong></p>
-        {props.children}
+        {/*<p>{1 + 1}</p>*/}
+        {/*<p>Number: <strong>{Math.round(Math.random() * 100)}</strong></p>*/}
+        <button onClick={props.onChange}>Change Title</button>
+        <input type="text" onChange={props.onChangeName}/>
     </div>
 )
 
