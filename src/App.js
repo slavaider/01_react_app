@@ -5,17 +5,19 @@ import Car from './components/car/Car'
 import Error from './components/errorBoundary/errorBoundary'
 import Counter from './components/Counter/Counter'
 
+export const ClickContext = React.createContext(false)
 class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
             cars: [
-                {name: 'Ford', year: 2015},
+                {name: 'Ford', year: '123'},
                 {name: 'Audi', year: 2001},
                 {name: 'Mazda', year: 2020}
             ],
             pageTitle: 'React components ',
-            showCars: true
+            showCars: true,
+            clicked: false
         }
     }
 
@@ -53,7 +55,9 @@ class App extends Component {
             <div className="App">
                 <h1>{this.state.pageTitle}</h1>
                 <h1>{this.props.title}</h1>
+                <ClickContext.Provider value={this.state.clicked}>
                 <Counter/>
+                </ClickContext.Provider>
                 <hr/>
                 <input style={{marginTop: 20}} type="text" onChange={this.ChangeHandler}/>
                 <button
@@ -62,6 +66,7 @@ class App extends Component {
                     Change title
                 </button>
                 <button onClick={this.show.bind(this)}>Show cars</button>
+                <button onClick={() => this.setState({clicked: true})}>Click</button>
 
                 <p style={divStyle}>123</p>
 
@@ -83,6 +88,7 @@ class App extends Component {
                                 return (
                                     <Error key={index}>
                                         <Car
+                                            index={index}
                                             key={index}
                                             obj={car}
                                             onChangeTitleName={this.changeTitleHandler.bind(this, car.name)}
